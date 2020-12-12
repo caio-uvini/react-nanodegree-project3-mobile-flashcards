@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 
+import { connect } from 'react-redux';
+
 import { CommonActions } from '@react-navigation/native';
 
 class AddCard extends Component {
@@ -71,4 +73,12 @@ class AddCard extends Component {
   }
 }
 
-export default AddCard;
+const mapStateToProps = () => ({});
+const mapDispatchToProps = () => ({});
+
+const AddCardContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddCard);
+
+export default AddCardContainer;

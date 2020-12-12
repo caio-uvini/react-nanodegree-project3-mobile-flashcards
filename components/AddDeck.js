@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 
+import { connect } from 'react-redux';
+import * as DeckActions from '../actions/deck';
+
+import { addDeck } from '../utils/api';
+
 import { CommonActions } from '@react-navigation/native';
 
 class AddDeck extends Component {
@@ -16,8 +21,10 @@ class AddDeck extends Component {
   }
 
   submitDeck = () => {
-    // TODO: actually create a new deck
-    this.goToHome();
+    addDeck(this.state.name)
+      .then(deck => this.props.onAddDeck(deck))
+      .then(() => this.goToHome())
+      .then(() => this.onNameChange(''));
   }
 
   goToHome = () => {
@@ -52,4 +59,14 @@ class AddDeck extends Component {
   }
 }
 
-export default AddDeck;
+const mapStateToProps = () => ({});
+const mapDispatchToProps = (dispatch) => ({
+  onAddDeck: (deck) => dispatch(DeckActions.addDeck(deck))
+})
+
+const AddDeckContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddDeck);
+
+export default AddDeckContainer;

@@ -70,11 +70,11 @@ class DeckList extends Component {
   }
 
   renderItem = (item, navigation) => {
-    return (<DeckListItem name={item.name} cardsCount={item.cardsCount} navigation={navigation} />)
+    return (<DeckListItem deckId={item.id} navigation={navigation} />)
   }
 
   render() {
-    const { navigation } = this.props;
+    const { decks, navigation } = this.props;
     const { ready } = this.state;
     
     if (ready === false) {
@@ -89,7 +89,7 @@ class DeckList extends Component {
       <View>
         <Text>DeckList</Text>
         <FlatList
-          data={ITEMS}
+          data={decks}
           renderItem={({ item }) => this.renderItem(item, navigation)}
           keyExtractor={item => item.id}
         />

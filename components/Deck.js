@@ -1,40 +1,43 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
+import { connect } from 'react-redux';
+
 class Deck extends Component {
 
-  goToAddCard = (navigation, name) => {
-    navigation.navigate('AddCard', { name });
+  goToAddCard = () => {
+    const { deck, navigation } = this.props;
+    navigation.navigate('AddCard', { deckId: deck.id, deckName: deck.name });
   }
 
-  goToQuiz = (navigation, name) => {
-    navigation.navigate('Quiz', { name });
+  goToQuiz = () => {
+    const { deck, navigation } = this.props;
+    navigation.navigate('Quiz', { deckId: deck.id, deckName: deck.name });
   }
 
-  deleteDeck = (navigation) => {
+  deleteDeck = () => {
     // TODO actually delete
-    navigation.navigate('DeckList');
+    this.props.navigation.navigate('DeckList');
   }
 
   render() {
 
-    const { navigation, route } = this.props;
-    const { name, cardsCount } = route.params;
+    const { name, cards } = this.props.deck;
 
     return (
       <View>
         <Text>{name}</Text>
-        <Text>{cardsCount} cards</Text>
+        <Text>{cards.length} cards</Text>
 
-        <TouchableOpacity onPress={() => this.goToAddCard(navigation, name)}>
+        <TouchableOpacity onPress={this.goToAddCard}>
           <Text>Add Card</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => this.goToQuiz(navigation, name)}>
+        <TouchableOpacity onPress={this.goToQuiz}>
           <Text>Start Quiz</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => this.deleteDeck(navigation)}>
+        <TouchableOpacity onPress={this.deleteDeck}>
           <Text>Delete Deck</Text>
         </TouchableOpacity>
 
@@ -43,4 +46,15 @@ class Deck extends Component {
   }
 }
 
-export default Deck;
+const mapStateToProps = (state, currentProps) => ({
+  deck: state.decks.decksById[currentProps.route.params.id]
+});
+
+const mapDispatchToProps = () => ({});
+
+const DeckContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Deck);
+
+export default DeckContainer;

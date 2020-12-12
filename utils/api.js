@@ -22,15 +22,16 @@ export function addDeck(deckName) {
     cards: []
   };
 
-  getDecks()
+  return getDecks()
     .then(decks => {
       const newDecks = {
         ...decks,
         [newDeck.id] : newDeck
       };
 
-      return AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(newDecks));
-    });
+      AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(newDecks))
+    })
+    .then(() => newDeck);
 }
 
 export function addCardToDeck(deckId, question, answer) {

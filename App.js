@@ -65,12 +65,12 @@ const RouteConfigs = {
   AddCard: {
     component: AddCard,
     name: "AddCard",
-    options: ({ route }) => ({ title: `Add Card - ${route.params.name}` })
+    options: ({ route }) => ({ title: `Add Card - ${route.params.deckName}` })
   },
   Quiz: {
     component: Quiz,
     name: "Quiz",
-    options: ({ route }) => ({ title: `Quiz - ${route.params.name}` })
+    options: ({ route }) => ({ title: `Quiz - ${route.params.deckName}` })
   }
 };
 
