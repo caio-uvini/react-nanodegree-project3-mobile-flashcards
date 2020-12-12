@@ -8,6 +8,11 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+
+import reducer from './reducers';
+
 import DeckList from './components/DeckList';
 import AddDeck from './components/AddDeck';
 import Deck from './components/Deck';
@@ -100,12 +105,16 @@ const TabNav = () =>(
   </Tab.Navigator>
 );
 
+const store = createStore(reducer);
+
 export default function App() {
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <NavigationContainer>
-        <TabNav />
-      </NavigationContainer>
-    </SafeAreaView>
+    <Provider store={store}>
+      <SafeAreaView style={{flex: 1}}>
+        <NavigationContainer>
+          <TabNav />
+        </NavigationContainer>
+      </SafeAreaView>
+    </Provider>
   );
 };
