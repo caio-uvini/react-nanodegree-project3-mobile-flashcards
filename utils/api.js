@@ -41,7 +41,7 @@ export function addCardToDeck(deckId, question, answer) {
     answer: answer
   }
 
-  getDecks()
+  return getDecks()
     .then(decks => {
       if (!decks) {
         return;
@@ -63,7 +63,7 @@ export function addCardToDeck(deckId, question, answer) {
         }
       }
 
-      return AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(newDecks));
+      AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(newDecks));
     })
-
+    .then(() => newCard);
 }

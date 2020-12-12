@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 
 import { CommonActions } from '@react-navigation/native';
 
+import { addCardToDeck } from '../utils/api';
+import * as CardActions from '../actions/card';
+
 class AddCard extends Component {
 
   state = {
@@ -19,8 +22,12 @@ class AddCard extends Component {
   }
 
   submitCard = () => {
-    // TODO: actually create a new card
-    this.goToHome();
+    const deckId = this.props.route.params.deckId;
+    const { question, answer } = this.state;
+
+    addCardToDeck(deckId, question, answer)
+      .then(card => this.props.onAddCard(deckId, card))
+      .then(() => this.goToHome());
   }
 
   goToHome = () => {
@@ -74,7 +81,10 @@ class AddCard extends Component {
 }
 
 const mapStateToProps = () => ({});
-const mapDispatchToProps = () => ({});
+
+const mapDispatchToProps = (dispatch) => ({
+  onAddCard: (deckId, card) => dispatch(CardActions.addCard(deckId, card))
+});
 
 const AddCardContainer = connect(
   mapStateToProps,
