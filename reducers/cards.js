@@ -28,7 +28,7 @@ const handleReceiveDecks = (state, { decks }) => {
         ...acc,
         ...deckCardsById
       }
-    });
+    }, {});
   
   return {
     ...state,
@@ -53,7 +53,7 @@ const buildCardsById = (deck) => {
       const cardId = buildCardId(card.deck, card.question);
       acc[cardId] = card;
       return acc;
-    });
+    }, {});
 }
 
 function cards(state = initialState, action) {

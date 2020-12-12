@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { View, Text, FlatList } from 'react-native';
+import AppLoading from 'expo-app-loading';
+
+import * as DeckActions from '../actions/deck';
 
 import DeckListItem from './DeckListItem';
+import { getDecks } from '../utils/api';
 
 const ITEMS = [
   {
@@ -49,12 +54,37 @@ const ITEMS = [
 
 class DeckList extends Component {
 
+  state = {
+    ready: false
+  }
+
+  fetchDecks = () => {
+    return getDecks()
+      .then(decks => this.props.onDecksReceived(decks))
+  }
+
+  onFinishFetch = () => {
+    this.setState(() => ({
+      ready: true
+    }))
+  }
+
   renderItem = (item, navigation) => {
     return (<DeckListItem name={item.name} cardsCount={item.cardsCount} navigation={navigation} />)
   }
 
   render() {
     const { navigation } = this.props;
+    const { ready } = this.state;
+    
+    if (ready === false) {
+      return <AppLoading 
+        startAsync={this.fetchDecks}
+        onFinish={this.onFinishFetch}
+        onError={err => console.error(err)}
+      />
+    }
+
     return (
       <View>
         <Text>DeckList</Text>
@@ -68,4 +98,17 @@ class DeckList extends Component {
   }
 }
 
-export default DeckList;
+const mapStateToProps = (state) => ({
+  decks: Object.values(state.decks.decksById)
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onDecksReceived: (decks) => dispatch(DeckActions.receiveDecks(decks))
+});
+
+const DeckListContainer = connect(
+  mapStateToProps, 
+  mapDispatchToProps
+)(DeckList);
+
+export default DeckListContainer;

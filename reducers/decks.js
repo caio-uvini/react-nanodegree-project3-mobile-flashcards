@@ -22,7 +22,7 @@ const handleReceiveDecks = (state, { decks }) => {
     .reduce((acc, deck) => {
       acc[deck.id] = deck
       return acc;
-    });
+    }, {});
 
   return {
     ...state,

@@ -4,7 +4,14 @@ const DECKS_STORAGE_KEY = 'mobile-flashcards:decks';
 
 export function getDecks() {
   return AsyncStorage.getItem(DECKS_STORAGE_KEY)
-    .then(item => JSON.parse(item));
+    .then(item => JSON.parse(item))
+    .then(decks => {
+      if (!decks) {
+        return {}
+      }
+
+      return decks;
+    });
 }
 
 export function addDeck(deckName) {
