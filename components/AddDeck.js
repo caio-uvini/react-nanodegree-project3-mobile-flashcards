@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import * as DeckActions from '../actions/deck';
 import { addDeck } from '../utils/api';
 import { white, purple, gray } from '../utils/colors';
+import TextButton from './TextButton';
 
 
 
@@ -41,12 +42,6 @@ class AddDeck extends Component {
   }
 
   render() {
-    const formValid = this.isFormValid();
-
-    const buttonStyles = formValid
-      ? styles.submitBtn
-      : [styles.submitBtn, styles.submitBtnDisabled]
-
     return (
       <View style={styles.container}>
         <Text style={styles.title}>What is the title of your new deck?</Text>
@@ -57,13 +52,9 @@ class AddDeck extends Component {
           style={styles.input}
         />
 
-        <TouchableOpacity
-          onPress={this.submitDeck}
-          disabled={!formValid}
-          style={buttonStyles}
-        >
-          <Text style={styles.submitBtnText}>Submit</Text>
-        </TouchableOpacity>
+        <TextButton onPress={this.submitDeck} disabled={!this.isFormValid()}>
+          Submit
+        </TextButton>
       </View>
     );
   }
@@ -90,23 +81,6 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10
   },
-  submitBtn: {
-    justifyContent: 'center',
-    alignSelf: 'center',
-    width: 90,
-    height: 35,
-    backgroundColor: purple,
-    borderRadius: 7,
-    marginTop: 20,
-  },
-  submitBtnDisabled: {
-    backgroundColor: gray,
-  },
-  submitBtnText: {
-    textAlign: 'center',
-    color: white,
-    fontSize: 18
-  }
 });
 
 const mapStateToProps = () => ({});
