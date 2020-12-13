@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, FlatList} from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 import AppLoading from 'expo-app-loading';
 
 import * as DeckActions from '../actions/deck';
@@ -8,6 +8,7 @@ import * as DeckActions from '../actions/deck';
 import EmptyDeckList from './EmptyDeckList';
 import DeckListItem from './DeckListItem';
 import { getDecks } from '../utils/api';
+import { black } from '../utils/colors';
 
 class DeckList extends Component {
 
@@ -52,6 +53,7 @@ class DeckList extends Component {
       <View>
         <FlatList
           data={decks}
+          ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
           renderItem={({ item }) => this.renderItem(item, navigation)}
           keyExtractor={item => item.id}
         />
@@ -59,6 +61,13 @@ class DeckList extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  itemSeparator: {
+    backgroundColor: black,
+    height: 0.5,
+  }
+});
 
 const mapStateToProps = (state) => ({
   decks: Object.values(state.decks.decksById)

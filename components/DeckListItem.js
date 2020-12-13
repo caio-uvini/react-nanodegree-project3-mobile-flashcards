@@ -3,6 +3,8 @@ import { Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { connect } from 'react-redux';
 
+import { gray } from '../utils/colors';
+
 class DeckListItem extends Component {
 
   onPress = () => {
@@ -15,20 +17,33 @@ class DeckListItem extends Component {
 
     return (
       <TouchableOpacity 
-        style={styles.listItem} 
+        style={styles.deck}
         onPress={this.onPress}
       >
-        <Text>{name} - {cards.length} cards</Text>
+        <Text style={styles.deckTitle}>{name}</Text>
+        <Text style={styles.deckSubtitle}>{cards.length} cards</Text>
       </TouchableOpacity>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  listItem: {
-    padding: 30,
-    margin: 2,
-    borderWidth: 2
+  deck: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 80,
+    borderWidth: 0,
+    borderRadius: 5,
+  },
+  deckTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  deckSubtitle: {
+    fontSize: 14,
+    paddingTop: 3,
+    color: gray
   }
 });
 
