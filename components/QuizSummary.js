@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 
+import { clearLocalNotifications, setLocalNotification } from '../utils/notifications';
+
 class QuizSummary extends Component {
+
+  componentDidMount() {
+    clearLocalNotifications()
+      .then(setLocalNotification);
+  }
 
   render() {
     const { correctCount, totalCount, onRestart, onGoBack } = this.props;

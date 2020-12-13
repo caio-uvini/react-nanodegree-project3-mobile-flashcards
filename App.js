@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, SafeAreaView, Platform } from 'react-native';
 import { FontAwesome, MaterialIcons } from '@expo/vector-icons';
 
@@ -19,6 +19,7 @@ import Deck from './components/Deck';
 import AddCard from './components/AddCard';
 import Quiz from './components/Quiz';
 import { purple, white } from './utils/colors';
+import { setLocalNotification } from './utils/notifications';
 
 const Stack = createStackNavigator();
 
@@ -107,14 +108,21 @@ const TabNav = () =>(
 
 const store = createStore(reducer);
 
-export default function App() {
-  return (
-    <Provider store={store}>
-      <SafeAreaView style={{flex: 1}}>
-        <NavigationContainer>
-          <TabNav />
-        </NavigationContainer>
-      </SafeAreaView>
-    </Provider>
-  );
+export default class App extends Component {
+
+  componentDidMount() {
+    setLocalNotification();
+  }
+
+  render () {
+    return (
+      <Provider store={store}>
+        <SafeAreaView style={{flex: 1}}>
+          <NavigationContainer>
+            <TabNav />
+          </NavigationContainer>
+        </SafeAreaView>
+      </Provider>
+    );
+  }
 };
