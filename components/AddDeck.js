@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { CommonActions } from '@react-navigation/native';
 
 import { connect } from 'react-redux';
 
 import * as DeckActions from '../actions/deck';
 import { addDeck } from '../utils/api';
-import { white, purple, gray } from '../utils/colors';
 import TextButton from './TextButton';
+import TextInput from './TextInput';
 
 
 
@@ -71,12 +71,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   input: {
-    backgroundColor: white,
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingTop: 15,
-    paddingBottom: 15,
-    paddingLeft: 5,
     marginTop: 20,
     marginLeft: 10,
     marginRight: 10
