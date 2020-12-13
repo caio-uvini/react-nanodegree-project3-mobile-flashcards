@@ -24,16 +24,18 @@ class Deck extends Component {
 
     const { name, cards } = this.props.deck;
 
+    const cardsCount = cards.length;
+
     return (
       <View>
         <Text>{name}</Text>
-        <Text>{cards.length} cards</Text>
+        <Text>{cardsCount} cards</Text>
 
         <TouchableOpacity onPress={this.goToAddCard}>
           <Text>Add Card</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={this.goToQuiz}>
+        <TouchableOpacity disabled={cardsCount === 0} onPress={this.goToQuiz}>
           <Text>Start Quiz</Text>
         </TouchableOpacity>
 
