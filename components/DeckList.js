@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, FlatList } from 'react-native';
+import { View, FlatList} from 'react-native';
 import AppLoading from 'expo-app-loading';
 
 import * as DeckActions from '../actions/deck';
 
+import EmptyDeckList from './EmptyDeckList';
 import DeckListItem from './DeckListItem';
 import { getDecks } from '../utils/api';
 
@@ -43,12 +44,8 @@ class DeckList extends Component {
       );
     }
 
-    if (decks.length == 0) {
-      return (
-        <View>
-          <Text>You don't have any deck yet! Add some and start studying!</Text>
-        </View>
-      );
+    if (decks.length == 0 ) {
+      return <EmptyDeckList />;
     }
 
     return (
