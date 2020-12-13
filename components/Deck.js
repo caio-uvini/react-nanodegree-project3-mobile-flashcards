@@ -23,7 +23,6 @@ class Deck extends Component {
   render() {
 
     const { name, cards } = this.props.deck;
-
     const cardsCount = cards.length;
 
     return (

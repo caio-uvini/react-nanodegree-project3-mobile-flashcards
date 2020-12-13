@@ -15,7 +15,7 @@ class QuizSummary extends Component {
 
     return (
       <View>
-        <Text>You completed the quiz! 🎉</Text>
+        <Text>Quiz completed! 🎉</Text>
         <Text>You've answered correctly {correctCount} of {totalCount} questions!</Text>
         <TouchableOpacity onPress={onRestart}>
           <Text>Restart Quiz</Text>

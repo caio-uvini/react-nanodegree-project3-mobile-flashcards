@@ -7,7 +7,7 @@ export function getDecks() {
     .then(item => JSON.parse(item))
     .then(decks => {
       if (!decks) {
-        return {}
+        return {};
       }
 
       return decks;
@@ -29,7 +29,7 @@ export function addDeck(deckName) {
         [newDeck.id] : newDeck
       };
 
-      AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(newDecks))
+      AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(newDecks));
     })
     .then(() => newDeck);
 }
@@ -39,7 +39,7 @@ export function addCardToDeck(deckId, question, answer) {
   const newCard = {
     question: question,
     answer: answer
-  }
+  };
 
   return getDecks()
     .then(decks => {
@@ -61,7 +61,7 @@ export function addCardToDeck(deckId, question, answer) {
             [newCard.question]: newCard
           }
         }
-      }
+      };
 
       AsyncStorage.setItem(DECKS_STORAGE_KEY, JSON.stringify(newDecks));
     })

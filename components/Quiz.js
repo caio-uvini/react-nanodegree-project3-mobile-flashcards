@@ -14,7 +14,7 @@ class Quiz extends Component {
 
     const cards = props.deck.cards;
     const currentCard = this.chooseRandomCard(cards);
-    const pendingCards = cards.filter(card => card !== currentCard)
+    const pendingCards = cards.filter(card => card !== currentCard);
 
     this.state = {
       pendingCards: pendingCards,
@@ -30,7 +30,7 @@ class Quiz extends Component {
         return {
           pendingCards: [],
           currentCard: null
-        }
+        };
       }
 
       if (prevState.pendingCards.length === 0) {
@@ -43,7 +43,7 @@ class Quiz extends Component {
       return {
         pendingCards: prevState.pendingCards.filter(card => card !== currentCard),
         currentCard: currentCard
-      }
+      };
     });
   }
 
@@ -64,7 +64,7 @@ class Quiz extends Component {
   restartQuiz = () => {
     const cards = this.props.deck.cards;
     const currentCard = this.chooseRandomCard(cards);
-    const pendingCards = cards.filter(card => card !== currentCard)
+    const pendingCards = cards.filter(card => card !== currentCard);
 
     this.setState(() => ({
       pendingCards: pendingCards,
@@ -77,7 +77,7 @@ class Quiz extends Component {
     this.props.navigation.dispatch(
       CommonActions.goBack({
         key: 'Deck',
-      }))
+      }));
   }
 
   render() {

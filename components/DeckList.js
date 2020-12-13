@@ -16,17 +16,17 @@ class DeckList extends Component {
 
   fetchDecks = () => {
     return getDecks()
-      .then(decks => this.props.onDecksReceived(decks))
+      .then(decks => this.props.onDecksReceived(decks));
   }
 
   onFinishFetch = () => {
     this.setState(() => ({
       ready: true
-    }))
+    }));
   }
 
   renderItem = (item, navigation) => {
-    return (<DeckListItem deckId={item.id} navigation={navigation} />)
+    return (<DeckListItem deckId={item.id} navigation={navigation} />);
   }
 
   render() {
@@ -34,11 +34,13 @@ class DeckList extends Component {
     const { ready } = this.state;
     
     if (ready === false) {
-      return <AppLoading 
-        startAsync={this.fetchDecks}
-        onFinish={this.onFinishFetch}
-        onError={err => console.error(err)}
-      />
+      return (
+        <AppLoading
+          startAsync={this.fetchDecks}
+          onFinish={this.onFinishFetch}
+          onError={err => console.error(err)}
+        />
+      );
     }
 
     if (decks.length == 0) {
@@ -46,7 +48,7 @@ class DeckList extends Component {
         <View>
           <Text>You don't have any deck yet! Add some and start studying!</Text>
         </View>
-      )
+      );
     }
 
     return (

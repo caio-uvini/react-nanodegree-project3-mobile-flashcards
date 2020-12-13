@@ -5,7 +5,7 @@ import { buildCardId } from '../utils/helper';
 
 const initialState = {
   cardsById: {}
-}
+};
 
 const handleAddCard = (state, { deckId, card }) => {
   return {
@@ -18,7 +18,7 @@ const handleAddCard = (state, { deckId, card }) => {
       }
     }
   };
-}
+};
 
 const handleReceiveDecks = (state, { decks }) => {
   const cardsById = Object.keys(decks)
@@ -37,7 +37,7 @@ const handleReceiveDecks = (state, { decks }) => {
       ...cardsById
     }
   };
-}
+};
 
 const buildCardsById = (deck) => {
   return Object.keys(deck.cards)
@@ -54,7 +54,7 @@ const buildCardsById = (deck) => {
       acc[cardId] = card;
       return acc;
     }, {});
-}
+};
 
 function cards(state = initialState, action) {
   switch (action.type) {

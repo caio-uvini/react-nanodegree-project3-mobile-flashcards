@@ -10,7 +10,7 @@ class Card extends Component {
   flipCard = () => {
     this.setState((prevState) => ({
       flipped: !prevState.flipped
-    }))
+    }));
   }
 
   render() {

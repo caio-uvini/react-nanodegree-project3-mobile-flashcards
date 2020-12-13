@@ -31,7 +31,7 @@ class AddDeck extends Component {
     this.props.navigation.dispatch(
       CommonActions.goBack({
         key: 'AddDeck',
-      }))
+      }));
   }
 
   isFormValid = () => {
@@ -62,7 +62,7 @@ class AddDeck extends Component {
 const mapStateToProps = () => ({});
 const mapDispatchToProps = (dispatch) => ({
   onAddDeck: (deck) => dispatch(DeckActions.addDeck(deck))
-})
+});
 
 const AddDeckContainer = connect(
   mapStateToProps,

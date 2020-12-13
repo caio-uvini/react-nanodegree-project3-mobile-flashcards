@@ -6,7 +6,7 @@ const NOTIFICATION_KEY = 'mobile-flashcards:notifications';
 
 export function clearLocalNotifications() {
   return AsyncStorage.removeItem(NOTIFICATION_KEY)
-    .then(Notifications.cancelAllScheduledNotificationsAsync)
+    .then(Notifications.cancelAllScheduledNotificationsAsync);
 }
 
 export function createNotification() {
@@ -22,7 +22,7 @@ export function createNotification() {
       sticky: false,
       vibrate: true
     }
-  }
+  };
 }
 
 export function setLocalNotification() {
@@ -51,11 +51,11 @@ export function setLocalNotification() {
                   minute: 0,
                   repeats: true
                 }
-              })
+              });
 
-              AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true))
+              AsyncStorage.setItem(NOTIFICATION_KEY, JSON.stringify(true));
             }
-          })
+          });
       }
-    })
+    });
 }

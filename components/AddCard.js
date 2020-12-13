@@ -34,7 +34,7 @@ class AddCard extends Component {
     this.props.navigation.dispatch(
       CommonActions.goBack({
         key: 'AddCard',
-      }))
+      }));
   }
 
   isFormValid = () => {

@@ -5,7 +5,7 @@ import { buildCardId } from '../utils/helper';
 
 const initialState = {
   decksById: {}
-}
+};
 
 const normalizeDeck = (deck) => {
   const cards = Object.keys(deck.cards).map(cardId => buildCardId(deck.id, cardId));
@@ -14,7 +14,7 @@ const normalizeDeck = (deck) => {
     name: deck.name,
     cards: cards
   };
-}
+};
 
 const handleReceiveDecks = (state, { decks }) => {
   const decksById = Object.keys(decks)
@@ -31,7 +31,7 @@ const handleReceiveDecks = (state, { decks }) => {
       ...decksById
     }
   };  
-}
+};
 
 const handleAddDeck = (state, { deck }) => {
   const normalizedDeck = normalizeDeck(deck);
@@ -42,7 +42,7 @@ const handleAddDeck = (state, { deck }) => {
       [normalizedDeck.id]: normalizedDeck
     }
   };
-}
+};
 
 const handleAddCard = (state, { deckId, card }) => {
   const deck = state.decksById[deckId];
@@ -59,7 +59,7 @@ const handleAddCard = (state, { deckId, card }) => {
       }
     }
   };
-}
+};
 
 function decks(state = initialState, action) {
   switch (action.type) {
@@ -70,7 +70,7 @@ function decks(state = initialState, action) {
     case CardActions.TYPES.ADD_CARD:
       return handleAddCard(state, action);
     default:
-      return state
+      return state;
   }
 }
 
