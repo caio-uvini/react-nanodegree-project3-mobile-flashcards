@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import { CommonActions } from '@react-navigation/native';
 
 import { connect } from 'react-redux';
+
 import * as DeckActions from '../actions/deck';
-
 import { addDeck } from '../utils/api';
+import { white, purple, gray } from '../utils/colors';
 
-import { CommonActions } from '@react-navigation/native';
+
 
 class AddDeck extends Component {
 
@@ -39,25 +41,73 @@ class AddDeck extends Component {
   }
 
   render() {
+    const formValid = this.isFormValid();
+
+    const buttonStyles = formValid
+      ? styles.submitBtn
+      : [styles.submitBtn, styles.submitBtnDisabled]
+
     return (
-      <View>
-        <Text>What is the title of your new deck?</Text>
+      <View style={styles.container}>
+        <Text style={styles.title}>What is the title of your new deck?</Text>
         <TextInput
           onChangeText={this.onNameChange}
-          placeholder={'Deck Name'}
+          placeholder={'Deck Title'}
           value={this.state.name}
+          style={styles.input}
         />
 
         <TouchableOpacity
           onPress={this.submitDeck}
-          disabled={!this.isFormValid()}
+          disabled={!formValid}
+          style={buttonStyles}
         >
-          <Text>Sumit</Text>
+          <Text style={styles.submitBtnText}>Submit</Text>
         </TouchableOpacity>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  title: {
+    textAlign: 'center',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  input: {
+    backgroundColor: white,
+    borderWidth: 1,
+    borderRadius: 5,
+    paddingTop: 15,
+    paddingBottom: 15,
+    paddingLeft: 5,
+    marginTop: 20,
+    marginLeft: 10,
+    marginRight: 10
+  },
+  submitBtn: {
+    justifyContent: 'center',
+    alignSelf: 'center',
+    width: 90,
+    height: 35,
+    backgroundColor: purple,
+    borderRadius: 7,
+    marginTop: 20,
+  },
+  submitBtnDisabled: {
+    backgroundColor: gray,
+  },
+  submitBtnText: {
+    textAlign: 'center',
+    color: white,
+    fontSize: 18
+  }
+});
 
 const mapStateToProps = () => ({});
 const mapDispatchToProps = (dispatch) => ({
