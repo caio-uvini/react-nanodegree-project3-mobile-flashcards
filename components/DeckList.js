@@ -50,7 +50,7 @@ class DeckList extends Component {
     }
 
     return (
-      <View>
+      <View style={styles.listContainer}>
         <FlatList
           data={decks}
           ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
@@ -63,6 +63,9 @@ class DeckList extends Component {
 }
 
 const styles = StyleSheet.create({
+  listContainer: {
+    flex: 1,
+  },
   itemSeparator: {
     backgroundColor: black,
     height: 0.5,
