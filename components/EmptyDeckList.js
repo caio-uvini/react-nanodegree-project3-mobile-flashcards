@@ -5,12 +5,12 @@ import { AntDesign } from '@expo/vector-icons';
 class EmptyDeckList extends Component {
   render() {
     return (
-      <View style={styles.emptyFeedback}>
-        <AntDesign name='exclamationcircleo' size={80} style={styles.emptyFeedbackIcon}/>
-        <Text style={styles.emptyFeedbackTitle}>
+      <View style={styles.container}>
+        <AntDesign name='exclamationcircleo' size={80} style={styles.icon}/>
+        <Text style={styles.title}>
           You don't have any deck yet!
         </Text>
-        <Text style={styles.emptyFeedbackSubtitle}>
+        <Text style={styles.subtitle}>
           Add some and start studying!
         </Text>
       </View>
@@ -19,19 +19,19 @@ class EmptyDeckList extends Component {
 }
 
 const styles = StyleSheet.create(({
-  emptyFeedback: {
+  container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  emptyFeedbackIcon: {
+  icon: {
     margin: 20,
   },
-  emptyFeedbackTitle: {
+  title: {
     fontSize: 18,
     fontWeight: 'bold',
   },
-  emptyFeedbackSubtitle: {
+  subtitle: {
     fontSize: 14,
     paddingTop: 3,
   }
