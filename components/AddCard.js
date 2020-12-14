@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 
 import { connect } from 'react-redux';
 
@@ -9,17 +9,31 @@ import { addCardToDeck } from '../utils/api';
 import * as CardActions from '../actions/card';
 import TextInput from './TextInput';
 import TextButton from './TextButton';
+import { red } from '../utils/colors';
+
+const MAX_TEXT_SIZE = 160;
 
 class AddCard extends Component {
 
   state = {
     question: '',
-    answer: ''
+    answer: '',
+    questionAlertMsg: '',
+    answerAlertMsg: ''
   }
 
   onTextChange = (text, fieldName) => {
+
+    if (text.length > MAX_TEXT_SIZE) {
+      this.setState(() => ({
+        [`${fieldName}AlertMsg`]: `Please do not exceed ${MAX_TEXT_SIZE} characters.`
+      }))
+      return;
+    }
+
     this.setState(() => ({
-      [fieldName]: text
+      [fieldName]: text,
+      [`${fieldName}AlertMsg`]: ''
     }));
   }
 
@@ -55,7 +69,7 @@ class AddCard extends Component {
 
   render() {
 
-    const { question, answer } = this.state;
+    const { question, answer, questionAlertMsg, answerAlertMsg } = this.state;
 
     return (
       <View style={styles.container}>
@@ -65,6 +79,7 @@ class AddCard extends Component {
           value={question}
           style={styles.input}
         />
+        <Text style={styles.alert}>{questionAlertMsg}</Text>
 
         <TextInput
           onChangeText={text => this.onTextChange(text, 'answer')}
@@ -72,6 +87,7 @@ class AddCard extends Component {
           value={answer}
           style={styles.input}
         />
+        <Text style={styles.alert}>{answerAlertMsg}</Text>
 
         <TextButton
           onPress={this.submitCard}
@@ -98,6 +114,11 @@ const styles = StyleSheet.create({
   button: {
     alignSelf: 'center',
     marginTop: 20,
+  },
+  alert: {
+    marginLeft: 10,
+    color: red,
+    fontSize: 10
   }
 });
 
