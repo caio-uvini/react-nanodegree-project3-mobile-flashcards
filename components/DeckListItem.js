@@ -14,6 +14,7 @@ class DeckListItem extends Component {
 
   render() {
     const { name, cards } = this.props.deck;
+    const cardsCount = cards.length;
 
     return (
       <TouchableOpacity 
@@ -21,7 +22,7 @@ class DeckListItem extends Component {
         onPress={this.onPress}
       >
         <Text style={styles.deckTitle}>{name}</Text>
-        <Text style={styles.deckSubtitle}>{cards.length} cards</Text>
+        <Text style={styles.deckSubtitle}>{cardsCount} card{cardsCount === 1 ? '' : 's'}</Text>
       </TouchableOpacity>
     );
   }

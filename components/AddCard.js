@@ -73,7 +73,11 @@ class AddCard extends Component {
           style={styles.input}
         />
 
-        <TextButton onPress={this.submitCard} disabled={!this.isFormValid()}>
+        <TextButton
+          onPress={this.submitCard}
+          disabled={!this.isFormValid()}
+          style={styles.button}
+        >
           Submit
         </TextButton>
       </View>
@@ -90,6 +94,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 10,
     marginRight: 10,
+  },
+  button: {
+    alignSelf: 'center',
+    marginTop: 20,
   }
 });
 

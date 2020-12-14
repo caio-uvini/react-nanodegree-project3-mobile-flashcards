@@ -3,7 +3,7 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 import { purple, gray, white } from '../utils/colors';
 
-const TextButton = ({ children, onPress, disabled, style={} }) => {
+const TextButton = ({ children, onPress, disabled=false, style={} }) => {
 
   const buttonStyles = disabled
     ? [styles.btn, styles.btnDisabled]
@@ -23,12 +23,10 @@ const TextButton = ({ children, onPress, disabled, style={} }) => {
 const styles = StyleSheet.create({
   btn: {
     justifyContent: 'center',
-    alignSelf: 'center',
     width: 90,
     height: 35,
     backgroundColor: purple,
     borderRadius: 7,
-    marginTop: 20,
   },
   btnDisabled: {
     backgroundColor: gray,

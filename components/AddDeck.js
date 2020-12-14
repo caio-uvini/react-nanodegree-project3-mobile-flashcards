@@ -52,7 +52,11 @@ class AddDeck extends Component {
           style={styles.input}
         />
 
-        <TextButton onPress={this.submitDeck} disabled={!this.isFormValid()}>
+        <TextButton
+          onPress={this.submitDeck}
+          disabled={!this.isFormValid()}
+          style={styles.button}
+        >
           Submit
         </TextButton>
       </View>
@@ -75,6 +79,10 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10
   },
+  button: {
+    alignSelf: 'center',
+    marginTop: 20,
+  }
 });
 
 const mapStateToProps = () => ({});
