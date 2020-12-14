@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { CommonActions } from '@react-navigation/native';
 
 import { connect } from 'react-redux';
@@ -89,7 +89,7 @@ class Quiz extends Component {
     const currentCardCount = totalCount - pendingCards.length;
 
     return (
-      <View>
+      <View style={styles.container}>
         {
           currentCard
             ? <QuizStep
@@ -109,6 +109,12 @@ class Quiz extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  }
+});
 
 const mapStateToProps = (state, currentProps) => ({
   deck: state.decks.decksById[currentProps.route.params.deckId]

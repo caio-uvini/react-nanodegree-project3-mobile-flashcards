@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { lightGray } from '../utils/colors';
+
+import TextButton from './TextButton';
 
 class Card extends Component {
 
@@ -21,14 +24,42 @@ class Card extends Component {
     const buttonText = flipped ? 'Show Question' : 'Show Answer';
 
     return (
-      <View>
-        <Text>{cardContent}</Text>
-        <TouchableOpacity onPress={this.flipCard}>
-          <Text>{buttonText}</Text>
-        </TouchableOpacity>
+      <View style={styles.container}>
+        <Text style={styles.text}>{cardContent}</Text>
+        <TextButton
+          onPress={this.flipCard}
+          style={styles.button}
+        >
+          <Text style={styles.buttonText}>{buttonText}</Text>
+        </TextButton>
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 10,
+    borderWidth: 1,
+    borderRadius: 5,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: lightGray
+  },
+  text: {
+    marginTop: 20,
+    textAlign: 'center',
+    fontSize: 25,
+    fontWeight: 'bold'
+  },
+  button: {
+    marginBottom: 20,
+    width: 120,
+  },
+  buttonText: {
+    fontSize: 15,
+  }
+});
 
 export default Card;
