@@ -10,6 +10,19 @@ class Card extends Component {
     flipped: false
   }
 
+  componentDidUpdate(prevProps) {
+    const { question, answer } = this.props.card;
+
+    const questionChanged = prevProps.card.question !== question;
+    const answerChanged = prevProps.card.answer !== answer;
+
+    if (questionChanged || answerChanged) {
+      this.setState(() => ({
+        flipped: false
+      }));
+    }
+  }
+
   flipCard = () => {
     this.setState((prevState) => ({
       flipped: !prevState.flipped
