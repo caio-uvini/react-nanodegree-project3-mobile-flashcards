@@ -25,16 +25,16 @@ class AddDeck extends Component {
 
   submitDeck = () => {
     addDeck(this.state.name)
-      .then(deck => this.props.onAddDeck(deck))
-      .then(() => this.goToHome())
+      .then(deck => {
+        this.props.onAddDeck(deck);
+        return deck;
+      })
+      .then(this.goToDeckView)
       .then(() => this.onNameChange(''));
   }
 
-  goToHome = () => {
-    this.props.navigation.dispatch(
-      CommonActions.goBack({
-        key: 'AddDeck',
-      }));
+  goToDeckView = (deck) => {
+    this.props.navigation.navigate('Deck', { id: deck.id, name: deck.name });
   }
 
   isFormValid = () => {
